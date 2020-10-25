@@ -174,6 +174,24 @@ void setup(void)
       }
     });
 
+    server.on("/abrirPortao", HTTP_GET, []() 
+    {
+      server.sendHeader("Connection", "close");
+      server.send(200, "text/html", index1);
+      digitalWrite (pinFechadura, HIGH);
+      delay(1000);
+      digitalWrite (pinFechadura, LOW);
+    });
+    
+    server.on("/abrirPortao", HTTP_POST, []() 
+    {
+      server.sendHeader("Connection", "close");
+      server.send(200, "text/html", index1);
+      digitalWrite (pinFechadura, HIGH);
+      delay(1000);
+      digitalWrite (pinFechadura, LOW);
+    });
+
     server.begin(); //inicia o servidor
   }
   
