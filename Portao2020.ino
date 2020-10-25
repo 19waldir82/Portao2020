@@ -54,6 +54,8 @@ void IRAM_ATTR resetModule(){
 
 void setup(void)
 {
+  pinMode(pinFechadura, OUTPUT);
+  
   Serial.begin(115200); //Serial para debug
 
   WiFi.mode(WIFI_AP_STA); //Comfigura o ESP32 como ponto de acesso e estação
