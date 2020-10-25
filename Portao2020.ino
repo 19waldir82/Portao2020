@@ -40,7 +40,7 @@ String index1 =
 "<!DOCTYPE html>"
   "<html>"
     "<head>"
-      "<title>Minha Casa</title>"
+      "<title>Talking Home</title>"
       "<meta charset='UTF-8'>"
 
       "<style>"
@@ -72,7 +72,7 @@ String index1 =
     "</head>"
     
     "<body>"
-      "<h1>Minha Casa</h1>"
+      "<h1>Talking Home</h1>"
       + INFOS +
       "<form method='POST' action='/arquivo' enctype='multipart/form-data'>"
       "<label>Chave: </label><input type='text' name='autorizacao'> <input type='submit'value='Ok'></form>"
@@ -80,9 +80,9 @@ String index1 =
       "<p><form method='POST' action='/abrirPortao'> <button>Abrir Portão</button></form></p>"
     "</body>"
   "</html>";
-String index2 = "<!DOCTYPE html><html><head><title>Minha Casa</title><meta charset='UTF-8'></head><body><h1>Minha Casa</h1>"+ INFOS +"<form method='POST'action='/update' enctype='multipart/form-data'><p><input type='file' name='update'></p><p><input type='submit' value='Atualizar'></p></form</body></html>";
-String atualizado = "<!DOCTYPE html><html><head><title>Minha Casa</title><meta charset='UTF-8'></head><body><h1>Minha Casa</h1><h2>Atualização bem sucedida!</h2></body></html>";
-String chaveIncorreta = "<!DOCTYPE html><html><head><title>Minha Casa</title><meta charset='UTF-8'></head><body><h1>Minha Casa</h1>"+ INFOS +"<h2>Chave incorreta</h2</body></html>";
+String index2 = "<!DOCTYPE html><html><head><title>Talking Home</title><meta charset='UTF-8'></head><body><h1>Talking Home</h1>"+ INFOS +"<form method='POST'action='/update' enctype='multipart/form-data'><p><input type='file' name='update'></p><p><input type='submit' value='Atualizar'></p></form</body></html>";
+String atualizado = "<!DOCTYPE html><html><head><title>Talking Home</title><meta charset='UTF-8'></head><body><h1>Talking Home</h1><h2>Atualização bem sucedida!</h2></body></html>";
+String chaveIncorreta = "<!DOCTYPE html><html><head><title>Talking Home</title><meta charset='UTF-8'></head><body><h1>Talking Home</h1>"+ INFOS +"<h2>Chave incorreta</h2</body></html>";
 
 MFRC522 mfrc522(SS_PIN, RST_PIN);   
 int statuss = 0;
