@@ -7,9 +7,9 @@
 #include <Update.h>
 #include <ESPmDNS.h>
 
-#define pinFechadura 15
-#define SS_PIN 5
-#define RST_PIN 4
+#define pinFechadura 5
+#define SS_PIN 21
+#define RST_PIN 22
 
 const char* ssid = "Thuliv";
 const char* password = "90iojknm";
