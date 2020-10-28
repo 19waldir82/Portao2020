@@ -6,8 +6,8 @@
 #include <Update.h>
 #include <ESPmDNS.h>
 
-#define pinFechadura 5
-#define SS_PIN 21
+#define pinFechadura 17
+#define SDA_PIN 21
 #define RST_PIN 22
 
 const char* ssid = "Thuliv";
@@ -26,6 +26,7 @@ const String VERSION = "<p> Versão: 1.0 </p>"; //Exemplo de um controle de vers
 const String INFOS = VERSION + CHIP_ID;
 
 boolean OTA_AUTORIZADO = false;
+unsigned long tempo = 0;
 
 WebServer server(80);
 
@@ -78,7 +79,7 @@ String index2 = "<!DOCTYPE html><html><head><title>ThulivTEC Gate</title><meta c
 String atualizado = "<!DOCTYPE html><html><head><title>ThulivTEC Gate</title><meta charset='UTF-8'></head><body><h1>ThulivTEC Gate</h1><h2>Atualização bem sucedida!</h2></body></html>";
 String chaveIncorreta = "<!DOCTYPE html><html><head><title>ThulivTEC Gate</title><meta charset='UTF-8'></head><body><h1>ThulivTEC Gate</h1>"+ INFOS +"<h2>Chave incorreta</h2</body></html>";
 
-MFRC522 mfrc522(SS_PIN, RST_PIN);   
+MFRC522 mfrc522(SDA_PIN, RST_PIN);   
 int statuss = 0;
 int out = 0;
 
@@ -197,18 +198,16 @@ void setup(void)
     {
       server.sendHeader("Connection", "close");
       server.send(200, "text/html", index1);
+      tempo = millis();
       digitalWrite (pinFechadura, HIGH);
-      delay(1000);
-      digitalWrite (pinFechadura, LOW);
     });
     
     server.on("/abrirPortao", HTTP_POST, []() 
     {
       server.sendHeader("Connection", "close");
       server.send(200, "text/html", index1);
+      tempo = millis();
       digitalWrite (pinFechadura, HIGH);
-      delay(1000);
-      digitalWrite (pinFechadura, LOW);
     });
 
     server.begin(); //inicia o servidor
@@ -245,11 +244,9 @@ void RFID(){
   content.toUpperCase();
   
   if ((content == "A63FF921") || (content == "D0D6652B") || (content == "A6ACCF24") || (content == "2967845A") || (content == "A318E636") || (content == "A320AC36") || (content == "D0A4882B") || (content == "F97EDAA3") || (content == "B61E7021") || (content == "8309EE36")) {    
+     tempo = millis();
      digitalWrite(pinFechadura, HIGH);
-     delay(1000);
-     digitalWrite(pinFechadura, LOW);
-    
-    statuss = 1;
+     statuss = 1;
   } 
   
   mfrc522.PICC_HaltA();
@@ -262,4 +259,8 @@ void loop(void)
   server.handleClient();
   timerWrite(timer, 0);
   RFID();
+
+  if((millis() - tempo) > 500){
+    digitalWrite(pinFechadura, LOW);
+    }
 }
